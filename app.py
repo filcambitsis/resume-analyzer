@@ -40,7 +40,6 @@ def home():
 
     return render_template("index.html", result=result)
 
-
 # run the app
 if __name__ == "__main__":
     app.run(debug=True)
