@@ -19,12 +19,9 @@ def home():
 
     if request.method == "POST":
         text = ""
-
         if request.form.get("resume_text"):
             text += request.form.get("resume_text")
-
         file = request.files.get("resume_file")
-
         if file and file.filename.endswith(".pdf"):
             try:
                 reader = PyPDF2.PdfReader(file)

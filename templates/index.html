@@ -30,14 +30,14 @@
         <h3>Technical Skills</h3>
         <ul>
             {% for skill in result.tech_skills %}
-                <li>{{ skill }}</li>
+                <li>{{ skill.capitalize() }}</li>
             {% endfor %}
         </ul>
 
         <h3>Professional Skills</h3>
         <ul>
             {% for skill in result.professional_skills %}
-                <li>{{ skill }}</li>
+                <li>{{ skill.capitalize() }}</li>
             {% endfor %}
         </ul>
     </div>
