@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="box">
+        <h1>Resume Analyzer</h1>
+    <form method="POST">
+        <textarea name="resume_text" placeholder="Please paste your resume here..."></textarea>
+        <button type = "submit">Analyze</button>
+    </form>
+
+    {% if result %}
+
+    <p>Word Count: {{ result.word_count }}</p>
+    <p>Score: {{ result.score }}/100</p>
+    <p>Feedback: {{ result.feedback }}</p>
+
+    <h3>Technical Skills</h3>
+    <ul>
+        {% for skill in result.tech_skills %}
+            <li>{{ skill }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Professional Skills</h3>
+    <ul>
+        {% for skill in result.professional_skills %}
+            <li>{{ skill }}</li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
