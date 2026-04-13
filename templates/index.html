@@ -4,39 +4,47 @@
     <title>Resume Analyzer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-    <div class="box">
-        <h1>Resume Analyzer</h1>
-    <form method="POST">
+<div class="box">
+    <h1>Resume Analyzer</h1>
+
+    <form method="POST" enctype="multipart/form-data">
         <textarea name="resume_text" placeholder="Please paste your resume here..."></textarea>
-        <button type = "submit">Analyze</button>
+
+        <br><br>
+        <p>Or upload your resume as a PDF:</p>
+        <input type="file" name="resume_file">
+
+        <button type="submit">Analyze</button>
     </form>
 
     {% if result %}
 
-    <p>Word Count: {{ result.word_count }}</p>
-    <p>Score: {{ result.score }}/100</p>
-    <p>Feedback: {{ result.feedback }}</p>
+    <div class="results">
+        <p>Word Count: {{ result.word_count }}</p>
+        <p>Score: {{ result.score }}/100</p>
+        <p>Feedback: {{ result.feedback }}</p>
 
-    <h3>Technical Skills</h3>
-    <ul>
-        {% for skill in result.tech_skills %}
-            <li>{{ skill }}</li>
-        {% endfor %}
-    </ul>
+        <h3>Technical Skills</h3>
+        <ul>
+            {% for skill in result.tech_skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
 
-    <h3>Professional Skills</h3>
-    <ul>
-        {% for skill in result.professional_skills %}
-            <li>{{ skill }}</li>
-        {% endfor %}
-    </ul>
+        <h3>Professional Skills</h3>
+        <ul>
+            {% for skill in result.professional_skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
     {% endif %}
 
 </div>
 
 </body>
-
 </html>
