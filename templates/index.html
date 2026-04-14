@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Resume Analyzer</title>
+    <!-- Link to your CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
@@ -10,6 +11,7 @@
 <div class="box">
     <h1>Resume Analyzer</h1>
 
+    <!-- Form for text input or PDF upload -->
     <form method="POST" enctype="multipart/form-data">
         <textarea name="resume_text" placeholder="Please paste your resume here..."></textarea>
 
@@ -21,27 +23,36 @@
     </form>
 
     {% if result %}
-
     <div class="results">
+
+        <!-- Basic results -->
         <p>Word Count: {{ result.word_count }}</p>
         <p>Score: {{ result.score }}/100</p>
         <p>Feedback: {{ result.feedback }}</p>
 
-        <h3>Technical Skills</h3>
+        <!-- Loop through skill categories -->
+        {% for category, skills in result.found_skills.items() %}
+            {% if skills %}
+                <div class="category">
+                    <h3>{{ category }}</h3>
+                    <ul>
+                        {% for skill in skills %}
+                            <li>{{ skill.title() }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Suggestions -->
+        <h3>Suggestions</h3>
         <ul>
-            {% for skill in result.tech_skills %}
-                <li>{{ skill.capitalize() }}</li>
+            {% for s in result.suggestions %}
+                <li>{{ s }}</li>
             {% endfor %}
         </ul>
 
-        <h3>Professional Skills</h3>
-        <ul>
-            {% for skill in result.professional_skills %}
-                <li>{{ skill.capitalize() }}</li>
-            {% endfor %}
-        </ul>
     </div>
-
     {% endif %}
 
 </div>
